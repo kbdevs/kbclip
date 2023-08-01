@@ -1,2 +1,4 @@
 # kbclip
-A clip compresser using ffmpeg
+
+
+[FFMPEG GUIDE](https://phoenixnap.com/kb/ffmpeg-windows)
