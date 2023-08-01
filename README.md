@@ -6,7 +6,7 @@ This will compress 4 at a time, you can change that to how powerful you think yo
 
 It does search subdirectories
 
-## IT WILL DELETE THE UNCOMPRESSED FILE AND ADD COMPRESSED_ TO THE START OF THE FILENAME
+## IT WILL DELETE THE UNCOMPRESSED FILE
 
 ![image](https://github.com/kbdevs/kbclip/assets/86767129/2df5a201-05c6-44c9-83b3-b0506edc16f9)
 
