@@ -4,6 +4,7 @@ this program will compress all .mp4 files in a directory, for me it has cut the 
 
 This will compress 4 at a time, you can change that to how powerful you think your GPU is.
 
+If you want to remove the compressed_ from the files use the other .py file
 
 ## IT WILL DELETE THE UNCOMPRESSED FILE AND ADD COMPRESSED_ TO THE START OF THE FILENAME
 
