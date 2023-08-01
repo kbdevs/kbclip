@@ -21,5 +21,5 @@ def compress_videos(directory):
                     executor.submit(compress_video, input_file, output_file)
 
 if __name__ == "__main__":
-    directory_path = input("What directory?: \n")  # Replace this with the actual directory path
+    directory_path = input("What directory?: \n")
     compress_videos(directory_path)
