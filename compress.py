@@ -15,17 +15,21 @@ def compress_video(input_file, output_file):
     os.remove(input_file)
     print(f"Deleted original file: {input_file}")
 
+def get_video_files(directory):
+    video_files = []
+    for root, _, files in os.walk(directory):
+        for filename in files:
+            if filename.lower().endswith(".mp4"):
+                input_file = os.path.join(root, filename)
+                video_files.append(input_file)
+    return video_files
+
 def compress_videos(directory):
     with ThreadPoolExecutor(max_workers=4) as executor:
-        video_files = []
-        for root, _, files in os.walk(directory):
-            for filename in files:
-                if filename.lower().endswith(".mp4"):
-                    input_file = os.path.join(root, filename)
-                    video_files.append(input_file)
-
-        # Sort the video files by their creation time in descending order (most recent first)
-        video_files.sort(key=get_creation_time, reverse=True)
+        video_files = get_video_files(directory)
+        
+        # Sort the video files by their creation time in ascending order (oldest first)
+        video_files.sort(key=get_creation_time)
 
         for input_file in video_files:
             output_file = os.path.join(os.path.dirname(input_file), f"compressed_{os.path.basename(input_file)}")
