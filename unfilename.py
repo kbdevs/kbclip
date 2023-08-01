@@ -6,19 +6,22 @@ def remove_compressed_prefix(directory):
         print(f"Error: The directory '{directory}' does not exist.")
         return
 
-    # List all files in the directory
-    files = os.listdir(directory)
+    # Iterate through all items (files and subdirectories) in the current directory
+    for item in os.listdir(directory):
+        item_path = os.path.join(directory, item)
 
-    # Iterate through the files and rename those that start with "compressed_"
-    for filename in files:
-        if filename.startswith("compressed_"):
-            new_filename = filename.replace("compressed_", "", 1)
-            old_path = os.path.join(directory, filename)
+        # If the item is a file and its name starts with "compressed_", rename it
+        if os.path.isfile(item_path) and item.startswith("compressed_"):
+            new_filename = item.replace("compressed_", "", 1)
             new_path = os.path.join(directory, new_filename)
 
             # Rename the file
-            os.rename(old_path, new_path)
-            print(f"Renamed '{filename}' to '{new_filename}'")
+            os.rename(item_path, new_path)
+            print(f"Renamed '{item}' to '{new_filename}'")
+
+        # If the item is a subdirectory, call the function recursively to process its contents
+        elif os.path.isdir(item_path):
+            remove_compressed_prefix(item_path)
 
 if __name__ == "__main__":
     directory_path = input("What directory?: \n")
