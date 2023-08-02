@@ -31,8 +31,13 @@ def compress_videos(directory, num_concurrent_tasks, prefix):
         video_files.sort(key=get_creation_time)
 
         for input_file in video_files:
-            output_file = os.path.join(os.path.dirname(input_file), f"{prefix}{os.path.basename(input_file)}")
-            executor.submit(compress_video, input_file, output_file)
+            if not os.path.basename(input_file).startswith(prefix):
+                # Only compress videos that do not have the specified prefix
+                output_file = os.path.join(os.path.dirname(input_file), f"{prefix}{os.path.basename(input_file)}")
+                executor.submit(compress_video, input_file, output_file)
+            else:
+                print(f"Skipping compression for {input_file} because it has the prefix '{prefix}'")
+
 
 def remove_compressed_prefix(directory):
     # Check if the provided directory exists
