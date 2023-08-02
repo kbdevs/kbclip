@@ -4,6 +4,8 @@ this program will compress all .mp4 files in a directory, for me it has cut the 
 
 It does search subdirectories
 
+It will not recompress already compressed files if you keep the same prefix
+
 ## IT WILL DELETE THE UNCOMPRESSED FILE
 
 ![image](https://github.com/kbdevs/kbclip/assets/86767129/2df5a201-05c6-44c9-83b3-b0506edc16f9)
