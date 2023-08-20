@@ -2,6 +2,8 @@
 
 this program will compress all .mp4 files in a directory, for me it has cut the size of the clips by about half (65%), without a noticable drop in quality, I think it only works on Nvidia GPU's but you can change the encoding algorithm if you need.
 
+Do it in individual clip folders, it may go crazy go stupid aahdahdahd if you do the main clip directory, so do it by game
+
 It does search subdirectories
 
 It will not recompress already compressed files if you keep the same prefix
