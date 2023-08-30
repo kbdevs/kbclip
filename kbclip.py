@@ -7,8 +7,13 @@ from concurrent.futures import ThreadPoolExecutor
 def get_creation_time(file_path):
     return os.path.getctime(file_path)
 
-def compress_video(input_file, output_file):
-    command = f'ffmpeg -i "{input_file}" -c:v h264_nvenc -rc constqp -qp 23 "{output_file}"'
+def should_compress(input_file):
+    metadata_command = f'ffprobe -v error -show_entries format_tags=description -of default=noprint_wrappers=1:nokey=1 "{input_file}"'
+    existing_metadata = subprocess.check_output(metadata_command, shell=True, text=True).strip()
+    return existing_metadata.lower() != "kbclip"
+
+def compress_video(input_file, output_file, prefix):
+    command = f'ffmpeg -i "{input_file}" -c:v h264_nvenc -rc constqp -qp 23 -metadata description="kbclip" "{output_file}"'
     subprocess.run(command, shell=True)
     print(f"Compressed {input_file} to {output_file}")
     os.remove(input_file)
@@ -31,13 +36,14 @@ def compress_videos(directory, num_concurrent_tasks, prefix):
         video_files.sort(key=get_creation_time)
 
         for input_file in video_files:
-            if not os.path.basename(input_file).startswith(prefix):
-                # Only compress videos that do not have the specified prefix
-                output_file = os.path.join(os.path.dirname(input_file), f"{prefix}{os.path.basename(input_file)}")
-                executor.submit(compress_video, input_file, output_file)
+            output_file = os.path.join(os.path.dirname(input_file), f"compressed_{os.path.basename(input_file)}")
+            if should_compress(input_file):
+                if not os.path.exists(output_file):  # Check if the output file already exists
+                    executor.submit(compress_video, input_file, output_file, prefix)
+                else:
+                    print(f"Skipped compression for {input_file} because {output_file} already exists")
             else:
-                print(f"Skipping compression for {input_file} because it has the prefix '{prefix}'")
-
+                print(f"Skipped compression for {input_file} because it already has the 'kbclip' metadata")
 
 def remove_compressed_prefix(directory):
     # Check if the provided directory exists
