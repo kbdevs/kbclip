@@ -22,4 +22,4 @@ It will not recompress already compressed files if you keep the same prefix
 [FFMPEG GUIDE](https://phoenixnap.com/kb/ffmpeg-windows)
 
 
-if you need help dm me on discord @kb.kb
+if you need help make a issue request
