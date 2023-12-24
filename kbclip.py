@@ -36,7 +36,7 @@ def compress_videos(directory, num_concurrent_tasks, prefix):
         video_files.sort(key=get_creation_time)
 
         for input_file in video_files:
-            output_file = os.path.join(os.path.dirname(input_file), f"compressed_{os.path.basename(input_file)}")
+            output_file = os.path.join(os.path.dirname(input_file), f"{prefix}{os.path.basename(input_file)}")
             if should_compress(input_file):
                 if not os.path.exists(output_file):  # Check if the output file already exists
                     executor.submit(compress_video, input_file, output_file, prefix)
