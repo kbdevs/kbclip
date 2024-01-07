@@ -3,6 +3,10 @@ import subprocess
 import tkinter as tk
 from tkinter import filedialog
 from concurrent.futures import ThreadPoolExecutor
+import customtkinter
+
+customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
+customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
 def get_creation_time(file_path):
     return os.path.getctime(file_path)
@@ -69,7 +73,7 @@ def remove_compressed_prefix(directory):
 def validate_prefix():
     prefix = prefix_entry.get().strip()  # Get the entered prefix and remove leading/trailing spaces
     if not prefix:
-        tk.messagebox.showerror("Error", "Please enter a prefix for the compressed files.")
+        customtkinter.CTk.messagebox.showerror("Error", "Please enter a prefix for the compressed files.")
         return False
     return True
 
@@ -85,7 +89,6 @@ def start_compression():
 def browse_directory():
     selected_directory = filedialog.askdirectory()
     if selected_directory:
-        directory_entry.delete(0, tk.END)
         directory_entry.insert(0, selected_directory)
 
 def remove_prefix_button_clicked():
@@ -93,42 +96,44 @@ def remove_prefix_button_clicked():
     remove_compressed_prefix(directory)
 
 # Create the main application window
-root = tk.Tk()
+root = customtkinter.CTk()  # create CTk window like you do with the Tk window
 root.title("kbclip")
+root.geometry("400x350")
 
 # Define the dark mode lavender color scheme
 background_color = "#211d2e"
 foreground_color = "#f2e9e4"
 button_color = "#8a89a6"
+hvr_color = "#75748c"
 slider_color = "#4f4d68"
 
 # Set the background color for the root window
 root.configure(bg=background_color)
 
 # Create and place widgets with the dark mode lavender color scheme
-label = tk.Label(root, text="Enter directory with clips:", bg=background_color, fg=foreground_color)
+label = customtkinter.CTkLabel(root, text="Enter directory with clips:")
 label.pack(pady=10)
 
-directory_entry = tk.Entry(root, width=50, bg=background_color, fg=foreground_color)
+directory_entry = customtkinter.CTkEntry(root, width=200)
 directory_entry.pack(pady=5)
 
-browse_button = tk.Button(root, text="Browse", command=browse_directory, bg=button_color, fg=foreground_color)
+browse_button = customtkinter.CTkButton(root, text="Browse", command=browse_directory, fg_color=button_color, hover_color=hvr_color)
 browse_button.pack(pady=5)
 
-concurrent_slider = tk.Scale(root, from_=1, to=10, orient=tk.HORIZONTAL, label="Concurrent Tasks", bg=background_color, fg=foreground_color, troughcolor=slider_color, highlightbackground=background_color)
+concurrent_slider = customtkinter.CTkSlider(root, from_=1, to=10, number_of_steps=10)
 concurrent_slider.pack(pady=5)
 
 # Add a new label and entry field for the prefix
-prefix_label = tk.Label(root, text="Enter file prefix:", bg=background_color, fg=foreground_color)
+prefix_label = customtkinter.CTkLabel(root, text="Enter file prefix:")
 prefix_label.pack(pady=5)
 
-prefix_entry = tk.Entry(root, width=20, bg=background_color, fg=foreground_color)
+prefix_entry = customtkinter.CTkEntry(root, width=200)
 prefix_entry.pack(pady=5)
 
-compress_button = tk.Button(root, text="Start Compression", command=start_compression, bg=button_color, fg=foreground_color)
+compress_button = customtkinter.CTkButton(root, text="Start Compression", command=start_compression, fg_color=button_color, hover_color=hvr_color)
 compress_button.pack(pady=10)
 
-remove_prefix_button = tk.Button(root, text="Remove Compressed Prefix", command=remove_prefix_button_clicked, bg=button_color, fg=foreground_color)
+remove_prefix_button = customtkinter.CTkButton(root, text="Remove Compressed Prefix", command=remove_prefix_button_clicked, fg_color=button_color, hover_color=hvr_color)
 remove_prefix_button.pack(pady=5)
 
 root.mainloop()
