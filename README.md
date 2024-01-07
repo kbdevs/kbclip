@@ -9,8 +9,8 @@ It does search subdirectories
 It will not recompress already compressed files if you keep the same prefix
 
 ## IT WILL DELETE THE UNCOMPRESSED FILE
+![image](https://github.com/kbdevs/kbclip/assets/86767129/76977ffa-d243-4edd-b204-aeaf5df4efd0)
 
-![image](https://github.com/kbdevs/kbclip/assets/86767129/2df5a201-05c6-44c9-83b3-b0506edc16f9)
 
 
 ![image](https://github.com/kbdevs/kbclip/assets/86767129/b1b9a24b-3971-4bd4-a719-8301a6fa6da7)
