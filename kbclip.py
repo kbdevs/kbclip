@@ -119,6 +119,9 @@ directory_entry.pack(pady=5)
 browse_button = customtkinter.CTkButton(root, text="Browse", command=browse_directory, fg_color=button_color, hover_color=hvr_color)
 browse_button.pack(pady=5)
 
+label2 = customtkinter.CTkLabel(root, text="How many concurrect compressions?:")
+label2.pack(pady=10)
+
 concurrent_slider = customtkinter.CTkSlider(root, from_=1, to=10, number_of_steps=10)
 concurrent_slider.pack(pady=5)
 
