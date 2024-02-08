@@ -98,7 +98,6 @@ def remove_prefix_button_clicked():
 # Create the main application window
 root = customtkinter.CTk()  # create CTk window like you do with the Tk window
 root.title("kbclip")
-root.geometry("400x350")
 
 # Define the dark mode lavender color scheme
 background_color = "#211d2e"
